@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/example_colambda.dir/example_colambda.cpp.o -o example_colambda  libcoroutine_static.a -lpthread 
