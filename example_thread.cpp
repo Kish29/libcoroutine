@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
         thread_num = atoi(argv[1]);
     }
     pthread_t tid[thread_num];
+    // 一共开启8个线程，每个线程执行8个协程，共64个任务
     for (int i = 0; i < thread_num; ++i) {
         pthread_create(tid + i, nullptr, thread_lambda(args) {
             char name[64];
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
                 coroutine_create(co + j, nullptr, coroutine_lambda(args, &monitor, j) {
                     char buf[255]{};
                     pthread_getname_np(pthread_self(), buf, 255);
-                    printf("j-%d %s!\n", j, buf);
+                    printf("%s.%d j-%d %s!\n", __func__, __LINE__, j, buf);
                     if (j == 0) {
                         printf("i am the last coroutine that my thread will exe\nafter 2 seconds, coroutine will shutdown\n");
                         sleep(2);

@@ -54,7 +54,7 @@ int coroutine_startup(const coroutine_func &co_ctl, void *args) {
     }
     assert(gCurrThreadCoEnv);
     while (true) {
-        // todo:执行协程
+        // todo:编写执行协程的算法,目前只是为了测试和演示
         auto *curr_work = gCurrThreadCoEnv->call_stack_[gCurrThreadCoEnv->stack_top_ - 1];
         if (!curr_work->is_main_ && !curr_work->finish_) {
             curr_work->exe();
